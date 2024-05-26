@@ -31,36 +31,40 @@
             this.buttonProbar = new System.Windows.Forms.Button();
             this.dataGridViewCargar = new System.Windows.Forms.DataGridView();
             this.labelID = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownID = new System.Windows.Forms.NumericUpDown();
             this.labelServant = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxServant = new System.Windows.Forms.TextBox();
             this.labelClass = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxClass = new System.Windows.Forms.ComboBox();
             this.labelLV = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownLV = new System.Windows.Forms.NumericUpDown();
             this.labelNoble_Phantasm = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxNP = new System.Windows.Forms.ComboBox();
             this.labelNp_Effect = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBoxNP_Effect = new System.Windows.Forms.ComboBox();
             this.labelGender = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBoxGender = new System.Windows.Forms.ComboBox();
             this.labelInvocatión_Date = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerInvocation_Date = new System.Windows.Forms.DateTimePicker();
             this.labelDescription = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBoxDescription = new System.Windows.Forms.TextBox();
+            this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.groupBoxInterface = new System.Windows.Forms.GroupBox();
+            this.buttonInsertar = new System.Windows.Forms.Button();
+            this.buttonActualizar = new System.Windows.Forms.Button();
+            this.buttonBorrar = new System.Windows.Forms.Button();
+            this.buttonFiltrar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCargar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLV)).BeginInit();
             this.groupBoxInterface.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonProbar
             // 
-            this.buttonProbar.Location = new System.Drawing.Point(581, 541);
+            this.buttonProbar.Location = new System.Drawing.Point(1184, 487);
             this.buttonProbar.Name = "buttonProbar";
-            this.buttonProbar.Size = new System.Drawing.Size(163, 37);
+            this.buttonProbar.Size = new System.Drawing.Size(137, 50);
             this.buttonProbar.TabIndex = 0;
             this.buttonProbar.Text = "Cargar";
             this.buttonProbar.UseVisualStyleBackColor = true;
@@ -80,212 +84,258 @@
             // 
             this.labelID.AutoSize = true;
             this.labelID.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelID.Location = new System.Drawing.Point(39, 32);
+            this.labelID.Location = new System.Drawing.Point(6, 31);
             this.labelID.Name = "labelID";
             this.labelID.Size = new System.Drawing.Size(26, 19);
             this.labelID.TabIndex = 2;
             this.labelID.Text = "ID";
             // 
-            // numericUpDown1
+            // numericUpDownID
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(109, 29);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(323, 27);
-            this.numericUpDown1.TabIndex = 3;
+            this.numericUpDownID.Location = new System.Drawing.Point(109, 29);
+            this.numericUpDownID.Name = "numericUpDownID";
+            this.numericUpDownID.Size = new System.Drawing.Size(350, 27);
+            this.numericUpDownID.TabIndex = 3;
             // 
             // labelServant
             // 
             this.labelServant.AutoSize = true;
             this.labelServant.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelServant.Location = new System.Drawing.Point(39, 71);
+            this.labelServant.Location = new System.Drawing.Point(3, 71);
             this.labelServant.Name = "labelServant";
             this.labelServant.Size = new System.Drawing.Size(64, 19);
             this.labelServant.TabIndex = 4;
             this.labelServant.Text = "Servant";
             // 
-            // textBox1
+            // textBoxServant
             // 
-            this.textBox1.Location = new System.Drawing.Point(109, 68);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(323, 27);
-            this.textBox1.TabIndex = 5;
+            this.textBoxServant.Location = new System.Drawing.Point(109, 68);
+            this.textBoxServant.Name = "textBoxServant";
+            this.textBoxServant.Size = new System.Drawing.Size(350, 27);
+            this.textBoxServant.TabIndex = 5;
             // 
             // labelClass
             // 
             this.labelClass.AutoSize = true;
             this.labelClass.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelClass.Location = new System.Drawing.Point(39, 113);
+            this.labelClass.Location = new System.Drawing.Point(6, 111);
             this.labelClass.Name = "labelClass";
             this.labelClass.Size = new System.Drawing.Size(49, 19);
             this.labelClass.TabIndex = 6;
             this.labelClass.Text = "Class";
             // 
-            // comboBox1
+            // comboBoxClass
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(109, 108);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(323, 27);
-            this.comboBox1.TabIndex = 7;
+            this.comboBoxClass.FormattingEnabled = true;
+            this.comboBoxClass.Location = new System.Drawing.Point(109, 108);
+            this.comboBoxClass.Name = "comboBoxClass";
+            this.comboBoxClass.Size = new System.Drawing.Size(350, 27);
+            this.comboBoxClass.TabIndex = 7;
             // 
             // labelLV
             // 
             this.labelLV.AutoSize = true;
             this.labelLV.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLV.Location = new System.Drawing.Point(39, 150);
+            this.labelLV.Location = new System.Drawing.Point(6, 149);
             this.labelLV.Name = "labelLV";
             this.labelLV.Size = new System.Drawing.Size(28, 19);
             this.labelLV.TabIndex = 8;
             this.labelLV.Text = "LV";
             // 
-            // numericUpDown2
+            // numericUpDownLV
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(109, 147);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(323, 27);
-            this.numericUpDown2.TabIndex = 9;
+            this.numericUpDownLV.Location = new System.Drawing.Point(109, 147);
+            this.numericUpDownLV.Name = "numericUpDownLV";
+            this.numericUpDownLV.Size = new System.Drawing.Size(350, 27);
+            this.numericUpDownLV.TabIndex = 9;
             // 
             // labelNoble_Phantasm
             // 
             this.labelNoble_Phantasm.AutoSize = true;
             this.labelNoble_Phantasm.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoble_Phantasm.Location = new System.Drawing.Point(39, 189);
+            this.labelNoble_Phantasm.Location = new System.Drawing.Point(6, 189);
             this.labelNoble_Phantasm.Name = "labelNoble_Phantasm";
             this.labelNoble_Phantasm.Size = new System.Drawing.Size(131, 19);
             this.labelNoble_Phantasm.TabIndex = 10;
             this.labelNoble_Phantasm.Text = "Noble_Phantasm";
             // 
-            // comboBox2
+            // comboBoxNP
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(177, 189);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(255, 27);
-            this.comboBox2.TabIndex = 11;
+            this.comboBoxNP.FormattingEnabled = true;
+            this.comboBoxNP.Location = new System.Drawing.Point(177, 189);
+            this.comboBoxNP.Name = "comboBoxNP";
+            this.comboBoxNP.Size = new System.Drawing.Size(282, 27);
+            this.comboBoxNP.TabIndex = 11;
             // 
             // labelNp_Effect
             // 
             this.labelNp_Effect.AutoSize = true;
             this.labelNp_Effect.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNp_Effect.Location = new System.Drawing.Point(39, 227);
+            this.labelNp_Effect.Location = new System.Drawing.Point(6, 230);
             this.labelNp_Effect.Name = "labelNp_Effect";
             this.labelNp_Effect.Size = new System.Drawing.Size(81, 19);
             this.labelNp_Effect.TabIndex = 12;
             this.labelNp_Effect.Text = "Np_Effect";
             // 
-            // comboBox3
+            // comboBoxNP_Effect
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(127, 227);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(305, 27);
-            this.comboBox3.TabIndex = 13;
+            this.comboBoxNP_Effect.FormattingEnabled = true;
+            this.comboBoxNP_Effect.Location = new System.Drawing.Point(127, 227);
+            this.comboBoxNP_Effect.Name = "comboBoxNP_Effect";
+            this.comboBoxNP_Effect.Size = new System.Drawing.Size(332, 27);
+            this.comboBoxNP_Effect.TabIndex = 13;
             // 
             // labelGender
             // 
             this.labelGender.AutoSize = true;
             this.labelGender.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGender.Location = new System.Drawing.Point(39, 273);
+            this.labelGender.Location = new System.Drawing.Point(6, 271);
             this.labelGender.Name = "labelGender";
             this.labelGender.Size = new System.Drawing.Size(63, 19);
             this.labelGender.TabIndex = 14;
             this.labelGender.Text = "Gender";
             // 
-            // comboBox4
+            // comboBoxGender
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(109, 268);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(323, 27);
-            this.comboBox4.TabIndex = 15;
+            this.comboBoxGender.FormattingEnabled = true;
+            this.comboBoxGender.Location = new System.Drawing.Point(109, 268);
+            this.comboBoxGender.Name = "comboBoxGender";
+            this.comboBoxGender.Size = new System.Drawing.Size(350, 27);
+            this.comboBoxGender.TabIndex = 15;
             // 
             // labelInvocatión_Date
             // 
             this.labelInvocatión_Date.AutoSize = true;
             this.labelInvocatión_Date.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInvocatión_Date.Location = new System.Drawing.Point(39, 311);
+            this.labelInvocatión_Date.Location = new System.Drawing.Point(6, 314);
             this.labelInvocatión_Date.Name = "labelInvocatión_Date";
             this.labelInvocatión_Date.Size = new System.Drawing.Size(126, 19);
             this.labelInvocatión_Date.TabIndex = 16;
             this.labelInvocatión_Date.Text = "Invocatión_Date";
             // 
-            // dateTimePicker1
+            // dateTimePickerInvocation_Date
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(177, 308);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(255, 27);
-            this.dateTimePicker1.TabIndex = 17;
+            this.dateTimePickerInvocation_Date.Location = new System.Drawing.Point(163, 308);
+            this.dateTimePickerInvocation_Date.Name = "dateTimePickerInvocation_Date";
+            this.dateTimePickerInvocation_Date.Size = new System.Drawing.Size(296, 27);
+            this.dateTimePickerInvocation_Date.TabIndex = 17;
             // 
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
             this.labelDescription.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescription.Location = new System.Drawing.Point(39, 343);
+            this.labelDescription.Location = new System.Drawing.Point(6, 346);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(92, 19);
             this.labelDescription.TabIndex = 18;
             this.labelDescription.Text = "Description";
             // 
-            // textBox2
+            // textBoxDescription
             // 
-            this.textBox2.Location = new System.Drawing.Point(138, 343);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(294, 27);
-            this.textBox2.TabIndex = 19;
+            this.textBoxDescription.Location = new System.Drawing.Point(138, 343);
+            this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.Size = new System.Drawing.Size(321, 27);
+            this.textBoxDescription.TabIndex = 19;
             // 
-            // checkBox1
+            // checkBoxActive
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(208, 388);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(75, 23);
-            this.checkBox1.TabIndex = 20;
-            this.checkBox1.Text = "Active";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxActive.AutoSize = true;
+            this.checkBoxActive.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxActive.Location = new System.Drawing.Point(206, 376);
+            this.checkBoxActive.Name = "checkBoxActive";
+            this.checkBoxActive.Size = new System.Drawing.Size(75, 23);
+            this.checkBoxActive.TabIndex = 20;
+            this.checkBoxActive.Text = "Active";
+            this.checkBoxActive.UseVisualStyleBackColor = true;
             // 
             // groupBoxInterface
             // 
-            this.groupBoxInterface.Controls.Add(this.checkBox1);
-            this.groupBoxInterface.Controls.Add(this.textBox2);
+            this.groupBoxInterface.Controls.Add(this.checkBoxActive);
+            this.groupBoxInterface.Controls.Add(this.textBoxDescription);
             this.groupBoxInterface.Controls.Add(this.labelDescription);
-            this.groupBoxInterface.Controls.Add(this.dateTimePicker1);
+            this.groupBoxInterface.Controls.Add(this.dateTimePickerInvocation_Date);
             this.groupBoxInterface.Controls.Add(this.labelInvocatión_Date);
-            this.groupBoxInterface.Controls.Add(this.comboBox4);
+            this.groupBoxInterface.Controls.Add(this.comboBoxGender);
             this.groupBoxInterface.Controls.Add(this.labelGender);
-            this.groupBoxInterface.Controls.Add(this.comboBox3);
+            this.groupBoxInterface.Controls.Add(this.comboBoxNP_Effect);
             this.groupBoxInterface.Controls.Add(this.labelNp_Effect);
-            this.groupBoxInterface.Controls.Add(this.comboBox2);
+            this.groupBoxInterface.Controls.Add(this.comboBoxNP);
             this.groupBoxInterface.Controls.Add(this.labelNoble_Phantasm);
-            this.groupBoxInterface.Controls.Add(this.numericUpDown2);
+            this.groupBoxInterface.Controls.Add(this.numericUpDownLV);
             this.groupBoxInterface.Controls.Add(this.labelLV);
-            this.groupBoxInterface.Controls.Add(this.comboBox1);
+            this.groupBoxInterface.Controls.Add(this.comboBoxClass);
             this.groupBoxInterface.Controls.Add(this.labelClass);
-            this.groupBoxInterface.Controls.Add(this.textBox1);
+            this.groupBoxInterface.Controls.Add(this.textBoxServant);
             this.groupBoxInterface.Controls.Add(this.labelServant);
-            this.groupBoxInterface.Controls.Add(this.numericUpDown1);
+            this.groupBoxInterface.Controls.Add(this.numericUpDownID);
             this.groupBoxInterface.Controls.Add(this.labelID);
             this.groupBoxInterface.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxInterface.Location = new System.Drawing.Point(12, 25);
             this.groupBoxInterface.Name = "groupBoxInterface";
-            this.groupBoxInterface.Size = new System.Drawing.Size(465, 433);
+            this.groupBoxInterface.Size = new System.Drawing.Size(479, 433);
             this.groupBoxInterface.TabIndex = 21;
             this.groupBoxInterface.TabStop = false;
             this.groupBoxInterface.Text = "Interface";
+            // 
+            // buttonInsertar
+            // 
+            this.buttonInsertar.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonInsertar.Location = new System.Drawing.Point(40, 487);
+            this.buttonInsertar.Name = "buttonInsertar";
+            this.buttonInsertar.Size = new System.Drawing.Size(137, 50);
+            this.buttonInsertar.TabIndex = 22;
+            this.buttonInsertar.Text = "Insertar";
+            this.buttonInsertar.UseVisualStyleBackColor = true;
+            this.buttonInsertar.Click += new System.EventHandler(this.buttonInsertar_Click);
+            // 
+            // buttonActualizar
+            // 
+            this.buttonActualizar.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonActualizar.Location = new System.Drawing.Point(256, 487);
+            this.buttonActualizar.Name = "buttonActualizar";
+            this.buttonActualizar.Size = new System.Drawing.Size(137, 50);
+            this.buttonActualizar.TabIndex = 23;
+            this.buttonActualizar.Text = "Actualizar";
+            this.buttonActualizar.UseVisualStyleBackColor = true;
+            // 
+            // buttonBorrar
+            // 
+            this.buttonBorrar.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBorrar.Location = new System.Drawing.Point(39, 576);
+            this.buttonBorrar.Name = "buttonBorrar";
+            this.buttonBorrar.Size = new System.Drawing.Size(138, 50);
+            this.buttonBorrar.TabIndex = 24;
+            this.buttonBorrar.Text = "Borrar";
+            this.buttonBorrar.UseVisualStyleBackColor = true;
+            // 
+            // buttonFiltrar
+            // 
+            this.buttonFiltrar.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFiltrar.Location = new System.Drawing.Point(255, 576);
+            this.buttonFiltrar.Name = "buttonFiltrar";
+            this.buttonFiltrar.Size = new System.Drawing.Size(138, 50);
+            this.buttonFiltrar.TabIndex = 25;
+            this.buttonFiltrar.Text = "Filtrar";
+            this.buttonFiltrar.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1333, 707);
+            this.Controls.Add(this.buttonFiltrar);
+            this.Controls.Add(this.buttonBorrar);
+            this.Controls.Add(this.buttonActualizar);
+            this.Controls.Add(this.buttonInsertar);
             this.Controls.Add(this.groupBoxInterface);
             this.Controls.Add(this.dataGridViewCargar);
             this.Controls.Add(this.buttonProbar);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCargar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLV)).EndInit();
             this.groupBoxInterface.ResumeLayout(false);
             this.groupBoxInterface.PerformLayout();
             this.ResumeLayout(false);
@@ -297,25 +347,29 @@
         private System.Windows.Forms.Button buttonProbar;
         private System.Windows.Forms.DataGridView dataGridViewCargar;
         private System.Windows.Forms.Label labelID;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownID;
         private System.Windows.Forms.Label labelServant;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxServant;
         private System.Windows.Forms.Label labelClass;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxClass;
         private System.Windows.Forms.Label labelLV;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDownLV;
         private System.Windows.Forms.Label labelNoble_Phantasm;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxNP;
         private System.Windows.Forms.Label labelNp_Effect;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBoxNP_Effect;
         private System.Windows.Forms.Label labelGender;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboBoxGender;
         private System.Windows.Forms.Label labelInvocatión_Date;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerInvocation_Date;
         private System.Windows.Forms.Label labelDescription;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.CheckBox checkBoxActive;
         private System.Windows.Forms.GroupBox groupBoxInterface;
+        private System.Windows.Forms.Button buttonInsertar;
+        private System.Windows.Forms.Button buttonActualizar;
+        private System.Windows.Forms.Button buttonBorrar;
+        private System.Windows.Forms.Button buttonFiltrar;
     }
 }
 
