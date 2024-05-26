@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,27 @@ namespace ExamenFinal.Data
                     return false;
                 }
             }
+        }
+        
+        //Cargo la base de datos================================================================================================
+        public DataTable Cargar()
+        {
+            DataTable personajes = new DataTable();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string sql = "SELECT * FROM fate";
+
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    {
+                        adapter.Fill(personajes);
+                    }
+                }
+            }
+            return personajes;
         }
     }
 }

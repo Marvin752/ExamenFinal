@@ -23,14 +23,7 @@ namespace ExamenFinal
 
         private void buttonProbar_Click(object sender, EventArgs e)
         {
-            if (Fate.probarConexion())
-            {
-                MessageBox.Show("Si se pudo 🧐🧐");
-            }
-            else
-            {
-                MessageBox.Show("Nel Pastel 🦁🦁");
-            }
+            dataGridViewCargar.DataSource = Fate.Cargar();
         }
     }
 }
