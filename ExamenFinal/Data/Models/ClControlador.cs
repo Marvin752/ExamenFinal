@@ -8,5 +8,7 @@ namespace ExamenFinal.Data.Models
 {
     internal class ClControlador
     {
+        public int current = -1;
+        public int totalRegistros = 0;
     }
 }

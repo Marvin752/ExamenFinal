@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ExamenFinal.Data
 {
-    internal class CxPrincipal
+    public class CxPrincipal
     {
         //Conecto la base de datos==============================================================================================
         string connectionString = "server=localhost;database=examenfinal;user=root;password=EggTortuga78";
@@ -148,6 +148,49 @@ namespace ExamenFinal.Data
             {
                 connection.Close();
             }
+        }
+
+        //Parte para avanzar entre los Servants=================================================================================
+        public List<Fate> ObtenerTodosLosUsuarios()
+        {
+            List<Fate> Servants = new List<Fate>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM fate";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                try
+                {
+                    connection.Open();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Fate servant = new Fate
+                        (
+                            id: reader.GetInt32("ID"),
+                            servant: reader.GetString("Servant"),
+                            classe: reader.GetString("Class"),
+                            lv: reader.GetByte("Lv"),
+                            noblePhantams: reader.GetString("Noble_Phantasm"),
+                            npEffect: reader.GetString("NP_Effect"),
+                            gender: reader.GetString("Gender"),
+                            invocationDate: reader.GetDateTime("Invocation_Date"),
+                            description: reader.GetString("Description"),
+                            activate: reader.GetBoolean("Active")
+                        );
+
+                        Servants.Add(servant);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+            return Servants;
         }
     }
 }
