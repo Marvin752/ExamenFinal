@@ -1,5 +1,6 @@
 ﻿using ExamenFinal.Data;
 using ExamenFinal.Data.Models;
+using ExamenFinal.FormularioAsegurar;
 using Org.BouncyCastle.Crypto.Modes;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ExamenFinal
 {
+
     public partial class Form1 : Form
     {
         //Las clases para el combobox de clases=================================================================================
@@ -68,6 +70,8 @@ namespace ExamenFinal
         //Cargo la base de datos================================================================================================
         private void buttonProbar_Click(object sender, EventArgs e)
         {
+            bottonActualizar confirmo = new bottonActualizar();
+            DialogResult resultara = confirmo.ShowDialog();
             dataGridViewCargar.DataSource = Fake.Cargar();
         }
 
@@ -166,40 +170,52 @@ namespace ExamenFinal
         private void buttonActualizar_Click(object sender, EventArgs e)
         {
             try
-            {
-                if (numericUpDownID.Value == 0)
+            { 
+                    if (numericUpDownID.Value == 0)
+                    {
+                        MessageBox.Show("Por favor ingrese un valor válido en el campo ID");
+                        numericUpDownID.Focus();
+                        return;
+                    }
+
+                    //Esta parte de aqui sirve para confirmar la actualizacion==================================================
+                bottonActualizar confirmo = new bottonActualizar();
+                DialogResult resultara = confirmo.ShowDialog();  // Mostrara el formulario de confirmación como un cuadro de diálogo modal
+                if (resultara == DialogResult.OK)
                 {
-                    MessageBox.Show("Por favor ingrese un valor válido en el campo ID");
-                    numericUpDownID.Focus();
-                    return;
-                }
-                usr.ID = (int)numericUpDownID.Value;
-                usr.Servant = textBoxServant.Text;
-                usr.Classe = comboBoxClass.SelectedItem?.ToString();
-                usr.Lv = (byte)numericUpDownLV.Value;
-                usr.Noble_Phantams = comboBoxNP.SelectedItem?.ToString();
-                usr.NPEffect = comboBoxNP_Effect.SelectedItem?.ToString();
-                usr.Gender = comboBoxGender.SelectedItem?.ToString();
-                usr.InvocationDate = dateTimePickerInvocation_Date.Value.Date;
-                usr.Description = textBoxDescription.Text;
-                usr.Activate = checkBoxActive.Checked;
-                usr.validacion = Fake.Actualizar(usr);
-                if (usr.validacion)
-                {
-                    MessageBox.Show("El personaje fue actualizado correctamente");
-                    LimpiarFormulario();
-                    dataGridViewCargar.DataSource = Fake.Cargar();
-                    usr.RestablecerUsr();
+                    usr.ID = (int)numericUpDownID.Value;
+                    usr.Servant = textBoxServant.Text;
+                    usr.Classe = comboBoxClass.SelectedItem?.ToString();
+                    usr.Lv = (byte)numericUpDownLV.Value;
+                    usr.Noble_Phantams = comboBoxNP.SelectedItem?.ToString();
+                    usr.NPEffect = comboBoxNP_Effect.SelectedItem?.ToString();
+                    usr.Gender = comboBoxGender.SelectedItem?.ToString();
+                    usr.InvocationDate = dateTimePickerInvocation_Date.Value.Date;
+                    usr.Description = textBoxDescription.Text;
+                    usr.Activate = checkBoxActive.Checked;
+                    usr.validacion = Fake.Actualizar(usr);
+                    if (usr.validacion)
+                    {
+                        MessageBox.Show("El personaje fue actualizado correctamente");
+                        LimpiarFormulario();
+                        dataGridViewCargar.DataSource = Fake.Cargar();
+                        usr.RestablecerUsr();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha courrido un error al actualizar personaje, por favor ingrese datos en los campos vacios");
+                        numericUpDownID.Focus();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ha courrido un error al actualizar personaje, por favor ingrese datos en los campos vacios");
-                    numericUpDownID.Focus();
+                    MessageBox.Show("No se actualizo el registro");
                 }
             }catch(Exception ex)
             {
                 MessageBox.Show($"Ha ocurrido un error al actualizar el personaje: {ex.Message}");
             }
         }
+
     }
 }
