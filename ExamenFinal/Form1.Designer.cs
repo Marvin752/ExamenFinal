@@ -241,7 +241,7 @@
             // 
             this.checkBoxActive.AutoSize = true;
             this.checkBoxActive.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxActive.Location = new System.Drawing.Point(206, 376);
+            this.checkBoxActive.Location = new System.Drawing.Point(196, 387);
             this.checkBoxActive.Name = "checkBoxActive";
             this.checkBoxActive.Size = new System.Drawing.Size(75, 23);
             this.checkBoxActive.TabIndex = 20;
@@ -297,6 +297,7 @@
             this.buttonActualizar.TabIndex = 23;
             this.buttonActualizar.Text = "Actualizar";
             this.buttonActualizar.UseVisualStyleBackColor = true;
+            this.buttonActualizar.Click += new System.EventHandler(this.buttonActualizar_Click);
             // 
             // buttonBorrar
             // 
@@ -307,6 +308,7 @@
             this.buttonBorrar.TabIndex = 24;
             this.buttonBorrar.Text = "Borrar";
             this.buttonBorrar.UseVisualStyleBackColor = true;
+            this.buttonBorrar.Click += new System.EventHandler(this.buttonBorrar_Click);
             // 
             // buttonFiltrar
             // 

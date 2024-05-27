@@ -1,5 +1,6 @@
 ﻿using ExamenFinal.Data;
 using ExamenFinal.Data.Models;
+using Org.BouncyCastle.Crypto.Modes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ExamenFinal
 {
@@ -60,6 +62,7 @@ namespace ExamenFinal
             InitializeComponent();
             Fake = new CxPrincipal();
             usr = new Fate();
+            dataGridViewCargar.DataSource = Fake.Cargar();
         }
 
         //Cargo la base de datos================================================================================================
@@ -80,16 +83,123 @@ namespace ExamenFinal
         //Boton para insertar personajes nuevos=================================================================================
         private void buttonInsertar_Click(object sender, EventArgs e)
         {
-            usr.Servant = textBoxServant.Text;
-            usr.Classe = comboBoxClass.SelectedItem.ToString();
-            usr.Lv = (byte)numericUpDownLV.Value;
-            usr.Noble_Phantams = comboBoxNP.SelectedItem.ToString();
-            usr.NPEffect = comboBoxNP_Effect.SelectedItem.ToString();
-            usr.Gender = comboBoxGender.SelectedItem.ToString();
-            usr.InvocationDate = dateTimePickerInvocation_Date.Value.Date;
-            usr.Description = textBoxDescription.Text;
-            usr.Activate = checkBoxActive.Checked;
-            Fake.Insertar(usr);
+            try
+            {
+                usr.Servant = textBoxServant.Text;
+                usr.Classe = comboBoxClass.SelectedItem?.ToString();  //El ? significa Null-Conditional
+                usr.Lv = (byte)numericUpDownLV.Value;
+                usr.Noble_Phantams = comboBoxNP.SelectedItem?.ToString();
+                usr.NPEffect = comboBoxNP_Effect.SelectedItem?.ToString();
+                usr.Gender = comboBoxGender.SelectedItem?.ToString();
+                usr.InvocationDate = dateTimePickerInvocation_Date.Value.Date;
+                usr.Description = textBoxDescription.Text;
+                usr.Activate = checkBoxActive.Checked;
+                usr.validacion = Fake.Insertar(usr);
+                if (usr.validacion)
+                {
+                    MessageBox.Show("El Servant fue ingresado correctamente");
+                    LimpiarFormulario();
+                    usr.RestablecerUsr();
+                    dataGridViewCargar.DataSource = Fake.Cargar();
+                }
+                else
+                {
+                    MessageBox.Show("Ha ocurrido un error, revise los datos ingresados");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error al ingresar al personaje: {ex.Message}");
+            }
+        }
+
+        //Funcion para limpiar el formulario====================================================================================
+        private void LimpiarFormulario()
+        {
+            numericUpDownID.ResetText();
+            textBoxServant.Clear();
+            comboBoxClass.SelectedIndex = -1;
+            comboBoxClass.Text = string.Empty;
+            numericUpDownLV.ResetText();
+            comboBoxNP.SelectedIndex = -1;
+            comboBoxNP.Text = string.Empty;
+            comboBoxNP_Effect.SelectedIndex = -1;
+            comboBoxNP_Effect.Text = string.Empty;
+            comboBoxGender.SelectedIndex = -1;
+            comboBoxGender.Text = string.Empty;
+            textBoxDescription.Clear();
+            checkBoxActive.Checked = false;
+        }
+
+        //Boton para borrar personajes==========================================================================================
+        private void buttonBorrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (numericUpDownID.Value == 0)
+                {
+                    MessageBox.Show("Por favor ingrese un valor válido en el campo ID");
+                    numericUpDownID.Focus();
+                    return; 
+                }
+                usr.ID = (int)numericUpDownID.Value;
+                usr.validacion = Fake.Eliminar(usr);
+                if(usr.validacion)
+                {
+                    MessageBox.Show("El personaje fue eliminado correctamente");
+                    usr.RestablecerUsr();
+                    dataGridViewCargar.DataSource = Fake.Cargar();
+                }
+                else
+                {
+                    MessageBox.Show("Ha courrido un error al eliminar personaje, por favor ingrese una ID valida");
+                    numericUpDownID.Focus();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error al borrar el personaje: {ex.Message}");
+            }
+        }
+
+        //Boton para actualizar personajes======================================================================================
+        private void buttonActualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (numericUpDownID.Value == 0)
+                {
+                    MessageBox.Show("Por favor ingrese un valor válido en el campo ID");
+                    numericUpDownID.Focus();
+                    return;
+                }
+                usr.ID = (int)numericUpDownID.Value;
+                usr.Servant = textBoxServant.Text;
+                usr.Classe = comboBoxClass.SelectedItem?.ToString();
+                usr.Lv = (byte)numericUpDownLV.Value;
+                usr.Noble_Phantams = comboBoxNP.SelectedItem?.ToString();
+                usr.NPEffect = comboBoxNP_Effect.SelectedItem?.ToString();
+                usr.Gender = comboBoxGender.SelectedItem?.ToString();
+                usr.InvocationDate = dateTimePickerInvocation_Date.Value.Date;
+                usr.Description = textBoxDescription.Text;
+                usr.Activate = checkBoxActive.Checked;
+                usr.validacion = Fake.Actualizar(usr);
+                if (usr.validacion)
+                {
+                    MessageBox.Show("El personaje fue actualizado correctamente");
+                    LimpiarFormulario();
+                    dataGridViewCargar.DataSource = Fake.Cargar();
+                    usr.RestablecerUsr();
+                }
+                else
+                {
+                    MessageBox.Show("Ha courrido un error al actualizar personaje, por favor ingrese datos en los campos vacios");
+                    numericUpDownID.Focus();
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error al actualizar el personaje: {ex.Message}");
+            }
         }
     }
 }

@@ -61,11 +61,11 @@ namespace ExamenFinal.Data
         }
 
         //Inserto un nuevo personaje en la base de datos========================================================================
-        public void Insertar(Fate usr)
+        public bool Insertar(Fate usr)
         {
             try
             {
-                string query = "INSERT INTO fate(Servant,Class,Lv,Noble_Phantasm,NP_Effect,Gender,Invocation_Date,Description,Active)Values(@Servant, @Class, @Lv, @Noble_Phantams, @NPEffect, @Gender, @InvocationDate, @Description, @Activate)";
+                string query = "INSERT INTO fate(Servant,Class,Lv,Noble_Phantasm,NP_Effect,Gender,Invocation_date,Description,Active)Values(@Servant, @Class, @Lv, @Noble_Phantams, @NPEffect, @Gender, @InvocationDate, @Description, @Activate)";
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@Servant", usr.Servant);
                 cmd.Parameters.AddWithValue("@Class", usr.Classe);
@@ -78,10 +78,71 @@ namespace ExamenFinal.Data
                 cmd.Parameters.AddWithValue("@Activate", usr.Activate);
                 connection.Open();
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al agregar el registro: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        //Borro un personaje del formulario=====================================================================================
+        public bool Eliminar(Fate usr)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "DELETE FROM fate WHERE ID = @ID";
+                    using (MySqlCommand command = new MySqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@ID", usr.ID);
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error al borrar el registro: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        //Actualizo un personaje por su ID=======================================================================================
+        public bool Actualizar(Fate usr)
+        {
+            try
+            {
+                string query = "UPDATE fate SET Servant = @Servant, Class = @Class, Lv = @Lv, Noble_Phantasm = @Noble_Phantasm, NP_Effect = @NPEffect, Gender = @Gender, Invocation_date = @InvocationDate, Description = @Description, Active = @Active WHERE ID = @ID";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@ID", usr.ID);
+                cmd.Parameters.AddWithValue("@Servant", usr.Servant);
+                cmd.Parameters.AddWithValue("@Class", usr.Classe);
+                cmd.Parameters.AddWithValue("@Lv", usr.Lv);
+                cmd.Parameters.AddWithValue("@Noble_Phantasm", usr.Noble_Phantams);
+                cmd.Parameters.AddWithValue("@NPEffect", usr.NPEffect);
+                cmd.Parameters.AddWithValue("@Gender", usr.Gender);
+                cmd.Parameters.AddWithValue("@InvocationDate", usr.InvocationDate);
+                cmd.Parameters.AddWithValue("@Description", usr.Description);
+                cmd.Parameters.AddWithValue("@Active", usr.Activate);
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al agregar el registro: " + ex.Message);
+                return false;
             }
             finally
             {

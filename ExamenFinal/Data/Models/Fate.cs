@@ -19,6 +19,7 @@ namespace ExamenFinal.Data.Models
         public DateTime InvocationDate { get; set; }
         public string Description { get; set; }
         public bool Activate { get; set; }
+        public bool validacion { get; set; }
 
         //Constructor sin paramentros===========================================================================================
         public Fate() { }
@@ -36,6 +37,21 @@ namespace ExamenFinal.Data.Models
             InvocationDate = invocationDate;
             Description = description;
             Activate = activate;
+        }
+        
+        //Con esto limpio para manejar mejor todo===============================================================================
+        public void RestablecerUsr()
+        {
+            Servant = string.Empty;
+            Classe = string.Empty;
+            Lv = 0;
+            Noble_Phantams = string.Empty;
+            NPEffect = string.Empty;
+            Gender = string.Empty;
+            InvocationDate = default(DateTime);
+            Description = string.Empty;
+            Activate = false;
+            validacion = false;
         }
     }
 }
