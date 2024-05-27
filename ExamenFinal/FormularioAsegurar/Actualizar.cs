@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ExamenFinal.FormularioAsegurar
 {
-    public partial class bottonActualizar : Form
+    public partial class FormActualizar : Form
     {
-        public bottonActualizar()
+        public FormActualizar()
         {
             InitializeComponent();
         }

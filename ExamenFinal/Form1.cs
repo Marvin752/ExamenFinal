@@ -70,8 +70,6 @@ namespace ExamenFinal
         //Cargo la base de datos================================================================================================
         private void buttonProbar_Click(object sender, EventArgs e)
         {
-            bottonActualizar confirmo = new bottonActualizar();
-            DialogResult resultara = confirmo.ShowDialog();
             dataGridViewCargar.DataSource = Fake.Cargar();
         }
 
@@ -179,7 +177,7 @@ namespace ExamenFinal
                     }
 
                     //Esta parte de aqui sirve para confirmar la actualizacion==================================================
-                bottonActualizar confirmo = new bottonActualizar();
+                FormActualizar confirmo = new FormActualizar();
                 DialogResult resultara = confirmo.ShowDialog();  // Mostrara el formulario de confirmación como un cuadro de diálogo modal
                 if (resultara == DialogResult.OK)
                 {

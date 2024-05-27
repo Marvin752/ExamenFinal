@@ -1,6 +1,6 @@
 ﻿namespace ExamenFinal.FormularioAsegurar
 {
-    partial class bottonActualizar
+    partial class FormActualizar
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormActualizar));
             this.label1 = new System.Windows.Forms.Label();
             this.buttonActualizar = new System.Windows.Forms.Button();
             this.buttonCancelar = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.label1.Size = new System.Drawing.Size(350, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "¿Esta seguro de actualizar el registro?";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // buttonActualizar
             // 
@@ -64,7 +64,7 @@
             this.buttonCancelar.UseVisualStyleBackColor = true;
             this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
-            // bottonActualizar
+            // FormActualizar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -72,8 +72,9 @@
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonActualizar);
             this.Controls.Add(this.label1);
-            this.Name = "bottonActualizar";
-            this.Text = "Form1";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormActualizar";
+            this.Text = "Actualizar";
             this.ResumeLayout(false);
             this.PerformLayout();
 
