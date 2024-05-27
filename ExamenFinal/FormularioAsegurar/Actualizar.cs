@@ -28,10 +28,5 @@ namespace ExamenFinal.FormularioAsegurar
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            //Le di click sin querer
-        }
     }
 }
