@@ -192,5 +192,11 @@ namespace ExamenFinal.Data
             }
             return Servants;
         }
+
+        //Para filtrar los registros============================================================================================
+        public bool FiltrarRegistros()
+        {
+
+        }
     }
 }

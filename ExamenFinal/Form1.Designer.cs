@@ -51,25 +51,30 @@
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.groupBoxInterface = new System.Windows.Forms.GroupBox();
+            this.buttonSiguiente = new System.Windows.Forms.Button();
+            this.buttonAnterior = new System.Windows.Forms.Button();
+            this.dateTimePickerDesde = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerHasta = new System.Windows.Forms.DateTimePicker();
+            this.checkBoxFecha = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonInsertar = new System.Windows.Forms.Button();
             this.buttonActualizar = new System.Windows.Forms.Button();
             this.buttonBorrar = new System.Windows.Forms.Button();
             this.buttonFiltrar = new System.Windows.Forms.Button();
-            this.buttonSiguiente = new System.Windows.Forms.Button();
-            this.buttonAnterior = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCargar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLV)).BeginInit();
             this.groupBoxInterface.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonProbar
             // 
-            this.buttonProbar.Location = new System.Drawing.Point(832, 630);
+            this.buttonProbar.Location = new System.Drawing.Point(855, 487);
             this.buttonProbar.Name = "buttonProbar";
             this.buttonProbar.Size = new System.Drawing.Size(137, 50);
             this.buttonProbar.TabIndex = 0;
-            this.buttonProbar.Text = "No. de Regsitros";
+            this.buttonProbar.Text = "No. Registros";
             this.buttonProbar.UseVisualStyleBackColor = true;
             this.buttonProbar.Click += new System.EventHandler(this.buttonProbar_Click);
             // 
@@ -280,6 +285,65 @@
             this.groupBoxInterface.TabStop = false;
             this.groupBoxInterface.Text = "Interface";
             // 
+            // buttonSiguiente
+            // 
+            this.buttonSiguiente.Location = new System.Drawing.Point(1184, 487);
+            this.buttonSiguiente.Name = "buttonSiguiente";
+            this.buttonSiguiente.Size = new System.Drawing.Size(137, 50);
+            this.buttonSiguiente.TabIndex = 26;
+            this.buttonSiguiente.Text = "Siguiente -->";
+            this.buttonSiguiente.UseVisualStyleBackColor = true;
+            this.buttonSiguiente.Click += new System.EventHandler(this.buttonSiguiente_Click);
+            // 
+            // buttonAnterior
+            // 
+            this.buttonAnterior.Location = new System.Drawing.Point(508, 487);
+            this.buttonAnterior.Name = "buttonAnterior";
+            this.buttonAnterior.Size = new System.Drawing.Size(137, 50);
+            this.buttonAnterior.TabIndex = 27;
+            this.buttonAnterior.Text = "<-- Anterior";
+            this.buttonAnterior.UseVisualStyleBackColor = true;
+            this.buttonAnterior.Click += new System.EventHandler(this.buttonAnterior_Click);
+            // 
+            // dateTimePickerDesde
+            // 
+            this.dateTimePickerDesde.Enabled = false;
+            this.dateTimePickerDesde.Location = new System.Drawing.Point(13, 27);
+            this.dateTimePickerDesde.Name = "dateTimePickerDesde";
+            this.dateTimePickerDesde.Size = new System.Drawing.Size(265, 22);
+            this.dateTimePickerDesde.TabIndex = 28;
+            // 
+            // dateTimePickerHasta
+            // 
+            this.dateTimePickerHasta.Enabled = false;
+            this.dateTimePickerHasta.Location = new System.Drawing.Point(561, 27);
+            this.dateTimePickerHasta.Name = "dateTimePickerHasta";
+            this.dateTimePickerHasta.Size = new System.Drawing.Size(265, 22);
+            this.dateTimePickerHasta.TabIndex = 29;
+            // 
+            // checkBoxFecha
+            // 
+            this.checkBoxFecha.AutoSize = true;
+            this.checkBoxFecha.Location = new System.Drawing.Point(360, 29);
+            this.checkBoxFecha.Name = "checkBoxFecha";
+            this.checkBoxFecha.Size = new System.Drawing.Size(135, 20);
+            this.checkBoxFecha.TabIndex = 30;
+            this.checkBoxFecha.Text = "Buscar por Fecha";
+            this.checkBoxFecha.UseVisualStyleBackColor = true;
+            this.checkBoxFecha.CheckedChanged += new System.EventHandler(this.checkBoxFecha_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxFecha);
+            this.groupBox1.Controls.Add(this.dateTimePickerHasta);
+            this.groupBox1.Controls.Add(this.dateTimePickerDesde);
+            this.groupBox1.Location = new System.Drawing.Point(494, 599);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(837, 78);
+            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Buscar por Fecha";
+            // 
             // buttonInsertar
             // 
             this.buttonInsertar.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -287,7 +351,7 @@
             this.buttonInsertar.Name = "buttonInsertar";
             this.buttonInsertar.Size = new System.Drawing.Size(137, 50);
             this.buttonInsertar.TabIndex = 22;
-            this.buttonInsertar.Text = "Insertar";
+            this.buttonInsertar.Text = "Agregar";
             this.buttonInsertar.UseVisualStyleBackColor = true;
             this.buttonInsertar.Click += new System.EventHandler(this.buttonInsertar_Click);
             // 
@@ -323,31 +387,12 @@
             this.buttonFiltrar.Text = "Filtrar";
             this.buttonFiltrar.UseVisualStyleBackColor = true;
             // 
-            // buttonSiguiente
-            // 
-            this.buttonSiguiente.Location = new System.Drawing.Point(1184, 487);
-            this.buttonSiguiente.Name = "buttonSiguiente";
-            this.buttonSiguiente.Size = new System.Drawing.Size(137, 50);
-            this.buttonSiguiente.TabIndex = 26;
-            this.buttonSiguiente.Text = "Siguiente -->";
-            this.buttonSiguiente.UseVisualStyleBackColor = true;
-            this.buttonSiguiente.Click += new System.EventHandler(this.buttonSiguiente_Click);
-            // 
-            // buttonAnterior
-            // 
-            this.buttonAnterior.Location = new System.Drawing.Point(508, 487);
-            this.buttonAnterior.Name = "buttonAnterior";
-            this.buttonAnterior.Size = new System.Drawing.Size(137, 50);
-            this.buttonAnterior.TabIndex = 27;
-            this.buttonAnterior.Text = "<-- Anterior";
-            this.buttonAnterior.UseVisualStyleBackColor = true;
-            this.buttonAnterior.Click += new System.EventHandler(this.buttonAnterior_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1333, 707);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonAnterior);
             this.Controls.Add(this.buttonSiguiente);
             this.Controls.Add(this.buttonFiltrar);
@@ -359,13 +404,15 @@
             this.Controls.Add(this.buttonProbar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Base de Datos";
+            this.Text = "Chaldea Records";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCargar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLV)).EndInit();
             this.groupBoxInterface.ResumeLayout(false);
             this.groupBoxInterface.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -394,12 +441,16 @@
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.CheckBox checkBoxActive;
         private System.Windows.Forms.GroupBox groupBoxInterface;
+        private System.Windows.Forms.Button buttonSiguiente;
+        private System.Windows.Forms.Button buttonAnterior;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDesde;
+        private System.Windows.Forms.DateTimePicker dateTimePickerHasta;
+        private System.Windows.Forms.CheckBox checkBoxFecha;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonInsertar;
         private System.Windows.Forms.Button buttonActualizar;
         private System.Windows.Forms.Button buttonBorrar;
         private System.Windows.Forms.Button buttonFiltrar;
-        private System.Windows.Forms.Button buttonSiguiente;
-        private System.Windows.Forms.Button buttonAnterior;
     }
 }
 

@@ -329,5 +329,11 @@ namespace ExamenFinal
         {
             MostrarRegistroAnterior();
         }
+
+        private void checkBoxFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePickerDesde.Enabled = checkBoxFecha.Checked;
+            dateTimePickerHasta.Enabled = checkBoxFecha.Checked;
+        }
     }
 }
