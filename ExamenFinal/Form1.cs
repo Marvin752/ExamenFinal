@@ -278,8 +278,8 @@ namespace ExamenFinal
             }
         }
 
-        //Metodo para mostrar el registro actual(Siguiente)=====================================================================
-        private void MostrarRegistroSiguiente()
+        //Boton para selecionar registros individuales (Siguiente)===============================================================
+        private void buttonSiguiente_Click(object sender, EventArgs e)
         {
             if (Servants != null && Servants.Count > 0)
             {
@@ -297,9 +297,9 @@ namespace ExamenFinal
                 MessageBox.Show("La lista de Servants está vacía o es nula.");
             }
         }
-
-        //Metodo para mostrar el registro actual(Anterior)======================================================================
-        private void MostrarRegistroAnterior()
+        
+        //Boton para selecionar regristros individuales (Anterior)===============================================================
+        private void buttonAnterior_Click(object sender, EventArgs e)
         {
             if (Servants != null && Servants.Count > 0)
             {
@@ -318,22 +318,48 @@ namespace ExamenFinal
             }
         }
 
-        //Boton para selecionar registros individuales (Siguiente)===============================================================
-        private void buttonSiguiente_Click(object sender, EventArgs e)
-        {
-            MostrarRegistroSiguiente();
-        }
-        
-        //Boton para selecionar regristros individuales (Anterior)===============================================================
-        private void buttonAnterior_Click(object sender, EventArgs e)
-        {
-            MostrarRegistroAnterior();
-        }
-
+        //Boton para filtrar la fecha============================================================================================
         private void checkBoxFecha_CheckedChanged(object sender, EventArgs e)
         {
             dateTimePickerDesde.Enabled = checkBoxFecha.Checked;
             dateTimePickerHasta.Enabled = checkBoxFecha.Checked;
+        }
+
+        //Boton para filtrar segun lo solicitado================================================================================
+        private void buttonFiltrar_Click(object sender, EventArgs e)
+        {
+            if (numericUpDownID.Value > 0 ||
+                !string.IsNullOrWhiteSpace(textBoxServant.Text) ||
+                comboBoxClass.SelectedItem != null ||
+                numericUpDownLV.Value > 0 ||
+                comboBoxNP.SelectedItem != null ||
+                comboBoxNP_Effect.SelectedItem != null ||
+                comboBoxGender.SelectedItem != null ||
+                dateTimePickerDesde.Enabled ||
+                !string.IsNullOrWhiteSpace(textBoxDescription.Text))
+            {
+                DateTime Entrada = dateTimePickerDesde.Value.Date;
+                DateTime Salida = dateTimePickerHasta.Value.Date;
+                usr.ID = (int)numericUpDownID.Value;
+                usr.Servant = textBoxServant.Text;
+                usr.Classe = comboBoxClass.SelectedItem?.ToString();
+                usr.Lv = (byte)numericUpDownLV.Value;
+                usr.Noble_Phantams = comboBoxNP.SelectedItem?.ToString();
+                usr.NPEffect = comboBoxNP_Effect.SelectedItem?.ToString();
+                usr.Gender = comboBoxGender.SelectedItem?.ToString();
+                usr.Description = textBoxDescription.Text;
+                usr.Activate = checkBoxActive.Checked;
+                dataGridViewCargar.DataSource = Fake.FiltrarRegistros(usr);
+                if(numericUpDownID.Value > 0)
+                {
+                    cursor1.current = (int)numericUpDownID.Value -1;
+                    MostrarRegistroActual();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingrese algo para buscar en cualquier campo");
+            }
         }
     }
 }

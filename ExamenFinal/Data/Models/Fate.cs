@@ -38,7 +38,7 @@ namespace ExamenFinal.Data.Models
             Description = description;
             Activate = activate;
         }
-        
+
         //Con esto limpio para manejar mejor todo===============================================================================
         public void RestablecerUsr()
         {

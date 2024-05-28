@@ -194,9 +194,62 @@ namespace ExamenFinal.Data
         }
 
         //Para filtrar los registros============================================================================================
-        public bool FiltrarRegistros()
+        public DataTable FiltrarRegistros(Fate usr)
         {
+            DataTable Servants = new DataTable();
+            if (usr.ID > 0 &&
+            string.IsNullOrEmpty(usr.Servant) &&
+            string.IsNullOrEmpty(usr.Classe) &&
+            usr.Lv < 0 &&
+            string.IsNullOrEmpty(usr.Noble_Phantams) &&
+            string.IsNullOrEmpty(usr.NPEffect) &&
+            string.IsNullOrEmpty(usr.Gender) &&
+            usr.InvocationDate == DateTime.MinValue &&
+            string.IsNullOrEmpty(usr.Description))
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
 
+                    string sql = "SELECT * FROM fate WHERE id = @id";
+                    using (MySqlCommand command = new MySqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@ID", usr.ID);
+
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                        {
+                            adapter.Fill(Servants);
+                        }
+                    }
+                }
+            }
+            else if (usr.ID > 0 &&
+            string.IsNullOrEmpty(usr.Servant) &&
+            string.IsNullOrEmpty(usr.Classe) &&
+            usr.Lv < 0 &&
+            string.IsNullOrEmpty(usr.Noble_Phantams) &&
+            string.IsNullOrEmpty(usr.NPEffect) &&
+            string.IsNullOrEmpty(usr.Gender) &&
+            usr.InvocationDate == DateTime.MinValue &&
+            string.IsNullOrEmpty(usr.Description))
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string sql = "SELECT * FROM fate WHERE id = @id";
+                    using (MySqlCommand command = new MySqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@ID", usr.ID);
+
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                        {
+                            adapter.Fill(Servants);
+                        }
+                    }
+                }
+            }
+            return Servants;
         }
     }
 }

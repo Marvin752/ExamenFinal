@@ -386,6 +386,7 @@
             this.buttonFiltrar.TabIndex = 25;
             this.buttonFiltrar.Text = "Filtrar";
             this.buttonFiltrar.UseVisualStyleBackColor = true;
+            this.buttonFiltrar.Click += new System.EventHandler(this.buttonFiltrar_Click);
             // 
             // Form1
             // 
