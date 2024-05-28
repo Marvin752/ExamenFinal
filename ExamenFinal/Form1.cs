@@ -1,6 +1,7 @@
 ﻿using ExamenFinal.Data;
 using ExamenFinal.Data.Models;
 using ExamenFinal.FormularioAsegurar;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 using Org.BouncyCastle.Crypto.Modes;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace ExamenFinal
 {
@@ -55,22 +57,50 @@ namespace ExamenFinal
             "Monster",
             "Undefined"
         };
+        //Metodo para cargar todo con la base de datos==========================================================================
+        public void IniciarTodo()
+        {
+            Servants = Fake.ObtenerTodosLosUsuarios();
+            if (Servants.Count > 0)
+            {
+                Servants = Fake.ObtenerTodosLosUsuarios();
+                dataGridViewCargar.DataSource = Servants;
+                cursor1.totalRegistros = Servants.Count;
+            }
+            else
+            {
+                MessageBox.Show("No hay registros");
+            }
+        } 
 
         //Invoco la clase que usare=============================================================================================
         CxPrincipal Fake;
         Fate usr;
+        List<Fate> Servants;
+        ClControlador cursor1;
         public Form1()
         {
             InitializeComponent();
             Fake = new CxPrincipal();
             usr = new Fate();
-            dataGridViewCargar.DataSource = Fake.Cargar();
+            cursor1 = new ClControlador();
         }
 
         //Cargo la base de datos================================================================================================
         private void buttonProbar_Click(object sender, EventArgs e)
         {
-            dataGridViewCargar.DataSource = Fake.Cargar();
+            Servants = Fake.ObtenerTodosLosUsuarios();
+            if (Servants.Count > 0)
+            {
+                Servants = Fake.ObtenerTodosLosUsuarios();
+                dataGridViewCargar.DataSource = Servants;
+                cursor1.totalRegistros = Servants.Count;
+                MessageBox.Show($"Hay un total de {cursor1.totalRegistros} registros");
+            }
+            else
+            {
+                MessageBox.Show("No hay registros");
+            }
         }
 
         //Aqui cargo los combobox con datos para el usuario=====================================================================
@@ -80,6 +110,7 @@ namespace ExamenFinal
             comboBoxNP.Items.AddRange(NobleP);
             comboBoxNP_Effect.Items.AddRange(NP_Effect);
             comboBoxGender.Items.AddRange(Genders);
+            IniciarTodo();
         }
 
         //Boton para insertar personajes nuevos=================================================================================
@@ -107,6 +138,13 @@ namespace ExamenFinal
                 else
                 {
                     MessageBox.Show("Ha ocurrido un error, revise los datos ingresados");
+                }
+                Servants = Fake.ObtenerTodosLosUsuarios();
+                if (Servants.Count > 0)
+                {
+                    Servants = Fake.ObtenerTodosLosUsuarios();
+                    dataGridViewCargar.DataSource = Servants;
+                    cursor1.totalRegistros = Servants.Count;
                 }
             }
             catch (Exception ex)
@@ -150,7 +188,9 @@ namespace ExamenFinal
                 {
                     MessageBox.Show("El personaje fue eliminado correctamente");
                     usr.RestablecerUsr();
-                    dataGridViewCargar.DataSource = Fake.Cargar();
+                    Servants = Fake.ObtenerTodosLosUsuarios();
+                    dataGridViewCargar.DataSource = Servants;
+                    cursor1.totalRegistros = Servants.Count;
                 }
                 else
                 {
@@ -215,5 +255,79 @@ namespace ExamenFinal
             }
         }
 
+        //Metodo para mostrar registro actual===================================================================================
+        private void MostrarRegistroActual()
+        {
+            if (cursor1.current >= 0 && cursor1.current < cursor1.totalRegistros)
+            {
+                Fate listado = Servants[cursor1.current];
+                numericUpDownID.Value = listado.ID;
+                textBoxServant.Text = listado.Servant;
+                comboBoxClass.SelectedItem = listado.Classe;
+                numericUpDownLV.Value = listado.Lv;
+                comboBoxNP.SelectedItem = listado.Noble_Phantams;
+                comboBoxNP_Effect.SelectedItem = listado.NPEffect;
+                comboBoxGender.SelectedItem = listado.Gender;
+                dateTimePickerInvocation_Date.Value = listado.InvocationDate;
+                textBoxDescription.Text = listado.Description;
+                checkBoxActive.Checked = listado.Activate;
+            }
+            else
+            {
+                MessageBox.Show($"El cursor está fuera de los límites: current = {cursor1.current}, totalRegistros = {cursor1.totalRegistros}");
+            }
+        }
+
+        //Metodo para mostrar el registro actual(Siguiente)=====================================================================
+        private void MostrarRegistroSiguiente()
+        {
+            if (Servants != null && Servants.Count > 0)
+            {
+                // Incrementar el cursor y validar que no se pase del total de registros
+                cursor1.current++;
+                if (cursor1.current >= cursor1.totalRegistros)
+                {
+                    cursor1.current = 0;
+                }
+
+                MostrarRegistroActual();
+            }
+            else
+            {
+                MessageBox.Show("La lista de Servants está vacía o es nula.");
+            }
+        }
+
+        //Metodo para mostrar el registro actual(Anterior)======================================================================
+        private void MostrarRegistroAnterior()
+        {
+            if (Servants != null && Servants.Count > 0)
+            {
+                // Decrementar el cursor y validar que no se pase del total de registros
+                cursor1.current--;
+                if (cursor1.current < 0)
+                {
+                    cursor1.current = cursor1.totalRegistros - 1;
+                }
+
+                MostrarRegistroActual();
+            }
+            else
+            {
+                MessageBox.Show("La lista de Servants está vacía o es nula.");
+            }
+        }
+
+        //Boton para selecionar registros individuales (Siguiente)===============================================================
+        private void buttonSiguiente_Click(object sender, EventArgs e)
+        {
+            MostrarRegistroSiguiente();
+        }
+        
+        //Boton para selecionar regristros individuales (Anterior)===============================================================
+        private void buttonAnterior_Click(object sender, EventArgs e)
+        {
+            MostrarRegistroAnterior();
+        }
     }
 }

@@ -55,6 +55,8 @@
             this.buttonActualizar = new System.Windows.Forms.Button();
             this.buttonBorrar = new System.Windows.Forms.Button();
             this.buttonFiltrar = new System.Windows.Forms.Button();
+            this.buttonSiguiente = new System.Windows.Forms.Button();
+            this.buttonAnterior = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCargar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLV)).BeginInit();
@@ -63,11 +65,11 @@
             // 
             // buttonProbar
             // 
-            this.buttonProbar.Location = new System.Drawing.Point(1184, 487);
+            this.buttonProbar.Location = new System.Drawing.Point(832, 630);
             this.buttonProbar.Name = "buttonProbar";
             this.buttonProbar.Size = new System.Drawing.Size(137, 50);
             this.buttonProbar.TabIndex = 0;
-            this.buttonProbar.Text = "Cargar";
+            this.buttonProbar.Text = "No. de Regsitros";
             this.buttonProbar.UseVisualStyleBackColor = true;
             this.buttonProbar.Click += new System.EventHandler(this.buttonProbar_Click);
             // 
@@ -321,11 +323,33 @@
             this.buttonFiltrar.Text = "Filtrar";
             this.buttonFiltrar.UseVisualStyleBackColor = true;
             // 
+            // buttonSiguiente
+            // 
+            this.buttonSiguiente.Location = new System.Drawing.Point(1184, 487);
+            this.buttonSiguiente.Name = "buttonSiguiente";
+            this.buttonSiguiente.Size = new System.Drawing.Size(137, 50);
+            this.buttonSiguiente.TabIndex = 26;
+            this.buttonSiguiente.Text = "Siguiente -->";
+            this.buttonSiguiente.UseVisualStyleBackColor = true;
+            this.buttonSiguiente.Click += new System.EventHandler(this.buttonSiguiente_Click);
+            // 
+            // buttonAnterior
+            // 
+            this.buttonAnterior.Location = new System.Drawing.Point(508, 487);
+            this.buttonAnterior.Name = "buttonAnterior";
+            this.buttonAnterior.Size = new System.Drawing.Size(137, 50);
+            this.buttonAnterior.TabIndex = 27;
+            this.buttonAnterior.Text = "<-- Anterior";
+            this.buttonAnterior.UseVisualStyleBackColor = true;
+            this.buttonAnterior.Click += new System.EventHandler(this.buttonAnterior_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1333, 707);
+            this.Controls.Add(this.buttonAnterior);
+            this.Controls.Add(this.buttonSiguiente);
             this.Controls.Add(this.buttonFiltrar);
             this.Controls.Add(this.buttonBorrar);
             this.Controls.Add(this.buttonActualizar);
@@ -374,6 +398,8 @@
         private System.Windows.Forms.Button buttonActualizar;
         private System.Windows.Forms.Button buttonBorrar;
         private System.Windows.Forms.Button buttonFiltrar;
+        private System.Windows.Forms.Button buttonSiguiente;
+        private System.Windows.Forms.Button buttonAnterior;
     }
 }
 
