@@ -127,24 +127,34 @@ namespace ExamenFinal
                 usr.InvocationDate = dateTimePickerInvocation_Date.Value.Date;
                 usr.Description = textBoxDescription.Text;
                 usr.Activate = checkBoxActive.Checked;
-                usr.validacion = Fake.Insertar(usr);
-                if (usr.validacion)
+                //Esta parte sirve para confirmar la insercion 
+                FormsAgregar confirmo = new FormsAgregar();
+                DialogResult resultara = confirmo.ShowDialog();
+                if (resultara == DialogResult.OK)
                 {
-                    MessageBox.Show("El Servant fue agregado correctamente");
-                    LimpiarFormulario();
-                    usr.RestablecerUsr();
-                    Servants = Fake.ObtenerTodosLosUsuarios();
-                    dataGridViewCargar.DataSource = Fake.Cargar();
-                    cursor1.totalRegistros = Servants.Count;
+                    usr.validacion = Fake.Insertar(usr);
+                    if (usr.validacion)
+                    {
+                        MessageBox.Show("El Servant fue agregado correctamente");
+                        LimpiarFormulario();
+                        usr.RestablecerUsr();
+                        Servants = Fake.ObtenerTodosLosUsuarios();
+                        dataGridViewCargar.DataSource = Fake.Cargar();
+                        cursor1.totalRegistros = Servants.Count;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error, revise los datos ingresados");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ha ocurrido un error, revise los datos ingresados");
+                    MessageBox.Show("No se agrego el registro");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ha ocurrido un error al ingresar al personaje: {ex.Message}");
+                MessageBox.Show($"Ha ocurrido un error al agregar al Servant: {ex.Message}");
             }
         }
 
