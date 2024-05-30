@@ -42,6 +42,7 @@ namespace ExamenFinal.Data.Models
         //Con esto limpio para manejar mejor todo===============================================================================
         public void RestablecerUsr()
         {
+            ID = 0;
             Servant = string.Empty;
             Classe = string.Empty;
             Lv = 0;

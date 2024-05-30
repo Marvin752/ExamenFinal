@@ -156,10 +156,12 @@ namespace ExamenFinal
         //Funcion para limpiar el formulario====================================================================================
         private void LimpiarFormulario()
         {
+            numericUpDownID.Value = 0;
             numericUpDownID.ResetText();
             textBoxServant.Clear();
             comboBoxClass.SelectedIndex = -1;
             comboBoxClass.Text = string.Empty;
+            numericUpDownLV.Value = 0;
             numericUpDownLV.ResetText();
             comboBoxNP.SelectedIndex = -1;
             comboBoxNP.Text = string.Empty;
@@ -169,6 +171,7 @@ namespace ExamenFinal
             comboBoxGender.Text = string.Empty;
             textBoxDescription.Clear();
             checkBoxActive.Checked = false;
+            checkBoxFecha.Checked = false;
         }
 
         //Boton para borrar personajes==========================================================================================
@@ -325,7 +328,7 @@ namespace ExamenFinal
             dateTimePickerHasta.Enabled = checkBoxFecha.Checked;
         }
 
-        //Boton para filtrar segun lo solicitado================================================================================
+        //Boton para filtrar segun lo solicitado=================================================================================
         private void buttonFiltrar_Click(object sender, EventArgs e)
         {
             if (numericUpDownID.Value > 0 ||
@@ -334,8 +337,8 @@ namespace ExamenFinal
                 numericUpDownLV.Value > 0 ||
                 comboBoxNP.SelectedItem != null ||
                 comboBoxNP_Effect.SelectedItem != null ||
-                comboBoxGender.SelectedItem != null ||
-                dateTimePickerDesde.Enabled ||
+                comboBoxGender.SelectedItem != null &&
+                !dateTimePickerDesde.Enabled ||
                 !string.IsNullOrWhiteSpace(textBoxDescription.Text))
             {
                 DateTime Entrada = dateTimePickerDesde.Value.Date;
@@ -356,10 +359,24 @@ namespace ExamenFinal
                     MostrarRegistroActual();
                 }
             }
+            if(dateTimePickerDesde.Enabled)
+            {
+                DateTime Desde = dateTimePickerDesde.Value.Date;
+                DateTime Hasta = dateTimePickerHasta.Value.Date;
+                dataGridViewCargar.DataSource = Fake.FiltrarFecha(Desde, Hasta);
+            }
             else
             {
                 MessageBox.Show("Ingrese algo para buscar en cualquier campo");
+                numericUpDownID.Focus();
             }
+        }
+
+        //Con esto limpio los datos ingresados para evitar problemas============================================================
+        private void buttonLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            usr.RestablecerUsr();
         }
     }
 }

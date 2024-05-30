@@ -197,59 +197,156 @@ namespace ExamenFinal.Data
         public DataTable FiltrarRegistros(Fate usr)
         {
             DataTable Servants = new DataTable();
-            if (usr.ID > 0 &&
-            string.IsNullOrEmpty(usr.Servant) &&
-            string.IsNullOrEmpty(usr.Classe) &&
-            usr.Lv < 0 &&
-            string.IsNullOrEmpty(usr.Noble_Phantams) &&
-            string.IsNullOrEmpty(usr.NPEffect) &&
-            string.IsNullOrEmpty(usr.Gender) &&
-            usr.InvocationDate == DateTime.MinValue &&
-            string.IsNullOrEmpty(usr.Description))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                string sql = "";
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = connection;
+
+                // Caso 1: Solo ID está definido
+                if (usr.ID > 0 &&
+                    string.IsNullOrEmpty(usr.Servant) &&
+                    string.IsNullOrEmpty(usr.Classe) &&
+                    usr.Lv <= 0 &&
+                    string.IsNullOrEmpty(usr.Noble_Phantams) &&
+                    string.IsNullOrEmpty(usr.NPEffect) &&
+                    string.IsNullOrEmpty(usr.Gender) &&
+                    string.IsNullOrEmpty(usr.Description))
+                {
+                    sql = "SELECT * FROM fate WHERE ID = @ID";
+                    command.Parameters.AddWithValue("@ID", usr.ID);
+                }
+                // Caso 2: Solo Class está definido
+                else if (usr.ID <= 0 &&
+                         string.IsNullOrEmpty(usr.Servant) &&
+                         !string.IsNullOrEmpty(usr.Classe) &&
+                         usr.Lv <= 0 &&
+                         string.IsNullOrEmpty(usr.Noble_Phantams) &&
+                         string.IsNullOrEmpty(usr.NPEffect) &&
+                         string.IsNullOrEmpty(usr.Gender) &&
+                         string.IsNullOrEmpty(usr.Description))
+                {
+                    sql = "SELECT * FROM fate WHERE Class = @Class";
+                    command.Parameters.AddWithValue("@Class", usr.Classe);
+                }
+                // Caso 3: Solo Servant esta definido
+                else if (usr.ID <= 0 &&
+                         !string.IsNullOrEmpty(usr.Servant) &&
+                         string.IsNullOrEmpty(usr.Classe) &&
+                         usr.Lv <= 0 &&
+                         string.IsNullOrEmpty(usr.Noble_Phantams) &&
+                         string.IsNullOrEmpty(usr.NPEffect) &&
+                         string.IsNullOrEmpty(usr.Gender) &&
+                         string.IsNullOrEmpty(usr.Description))
+                {
+                    sql = "SELECT * FROM fate WHERE Servant = @Servant";
+                    command.Parameters.AddWithValue("@Servant", usr.Servant);
+                }
+                // Caso 4: Solo Nivel esta definido
+                else if (usr.ID <= 0 &&
+                         string.IsNullOrEmpty(usr.Servant) &&
+                         string.IsNullOrEmpty(usr.Classe) &&
+                         usr.Lv > 0 &&
+                         string.IsNullOrEmpty(usr.Noble_Phantams) &&
+                         string.IsNullOrEmpty(usr.NPEffect) &&
+                         string.IsNullOrEmpty(usr.Gender) &&
+                         string.IsNullOrEmpty(usr.Description))
+                {
+                    sql = "SELECT * FROM fate WHERE LV = @Lv";
+                    command.Parameters.AddWithValue("@Lv", usr.Lv);
+                }
+                // Caso 5: Solo Noble_Phantasm esta definido
+                else if (usr.ID <= 0 &&
+                         string.IsNullOrEmpty(usr.Servant) &&
+                         string.IsNullOrEmpty(usr.Classe) &&
+                         usr.Lv <= 0 &&
+                         !string.IsNullOrEmpty(usr.Noble_Phantams) &&
+                         string.IsNullOrEmpty(usr.NPEffect) &&
+                         string.IsNullOrEmpty(usr.Gender) &&
+                         string.IsNullOrEmpty(usr.Description))
+                {
+                    sql = "SELECT * FROM fate WHERE Noble_Phantasm = @Noble_Phantasm";
+                    command.Parameters.AddWithValue("@Noble_Phantasm", usr.Noble_Phantams);
+                }
+                // Caso 6: Solo NP_Effect esta definido
+                else if (usr.ID <= 0 &&
+                         string.IsNullOrEmpty(usr.Servant) &&
+                         string.IsNullOrEmpty(usr.Classe) &&
+                         usr.Lv <= 0 &&
+                         string.IsNullOrEmpty(usr.Noble_Phantams) &&
+                         !string.IsNullOrEmpty(usr.NPEffect) &&
+                         string.IsNullOrEmpty(usr.Gender) &&
+                         string.IsNullOrEmpty(usr.Description))
+                {
+                    sql = "SELECT * FROM fate WHERE NP_Effect = @NPEffect";
+                    command.Parameters.AddWithValue("@NPEffect", usr.NPEffect);
+                }
+                // Caso 7: Solo Gender esta definido
+                else if (usr.ID <= 0 &&
+                         string.IsNullOrEmpty(usr.Servant) &&
+                         string.IsNullOrEmpty(usr.Classe) &&
+                         usr.Lv <= 0 &&
+                         string.IsNullOrEmpty(usr.Noble_Phantams) &&
+                         string.IsNullOrEmpty(usr.NPEffect) &&
+                         !string.IsNullOrEmpty(usr.Gender) &&
+                         string.IsNullOrEmpty(usr.Description))
+                {
+                    sql = "SELECT * FROM fate WHERE Gender = @Gender";
+                    command.Parameters.AddWithValue("@Gender", usr.Gender);
+                }
+                // Caso 8: Solo conozco alguna parte de la historia
+                else if (usr.ID <= 0 &&
+                         string.IsNullOrEmpty(usr.Servant) &&
+                         string.IsNullOrEmpty(usr.Classe) &&
+                         usr.Lv <= 0 &&
+                         string.IsNullOrEmpty(usr.Noble_Phantams) &&
+                         string.IsNullOrEmpty(usr.NPEffect) &&
+                         string.IsNullOrEmpty(usr.Gender) &&
+                         !string.IsNullOrEmpty(usr.Description))
+                {
+                    sql = "SELECT * FROM fate WHERE Description Like @Description";
+                    command.Parameters.AddWithValue("@Description", "%" + usr.Description + "%");
+                }
+                // Ejecutar consulta
+                if (!string.IsNullOrEmpty(sql))
                 {
                     connection.Open();
-
-                    string sql = "SELECT * FROM fate WHERE id = @id";
-                    using (MySqlCommand command = new MySqlCommand(sql, connection))
+                    command.CommandText = sql;
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
                     {
-                        command.Parameters.AddWithValue("@ID", usr.ID);
-
-                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
-                        {
-                            adapter.Fill(Servants);
-                        }
+                        adapter.Fill(Servants);
                     }
                 }
-            }
-            else if (usr.ID > 0 &&
-            string.IsNullOrEmpty(usr.Servant) &&
-            string.IsNullOrEmpty(usr.Classe) &&
-            usr.Lv < 0 &&
-            string.IsNullOrEmpty(usr.Noble_Phantams) &&
-            string.IsNullOrEmpty(usr.NPEffect) &&
-            string.IsNullOrEmpty(usr.Gender) &&
-            usr.InvocationDate == DateTime.MinValue &&
-            string.IsNullOrEmpty(usr.Description))
-            {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                else
                 {
-                    connection.Open();
-
-                    string sql = "SELECT * FROM fate WHERE id = @id";
-                    using (MySqlCommand command = new MySqlCommand(sql, connection))
-                    {
-                        command.Parameters.AddWithValue("@ID", usr.ID);
-
-                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
-                        {
-                            adapter.Fill(Servants);
-                        }
-                    }
+                    // Manejar caso en que ninguna condición se cumpla
+                    MessageBox.Show("No se encontraron registros que coincidan con los criterios.");
                 }
             }
             return Servants;
+        }
+
+        //Buscar por fecha======================================================================================================
+        public DataTable FiltrarFecha(DateTime Desde, DateTime Hasta)
+        {
+            DataTable Servant = new DataTable();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string sql = "SELECT * FROM fate WHERE Invocation_date BETWEEN @Desde and @Hasta";
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Desde", Desde);
+                    command.Parameters.AddWithValue("@Hasta", Hasta);
+
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    {
+                        adapter.Fill(Servant);
+                    }
+                }
+            }
+            return Servant;
         }
     }
 }
