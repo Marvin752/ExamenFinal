@@ -254,6 +254,7 @@ namespace ExamenFinal
                     {
                         MessageBox.Show("El personaje fue actualizado correctamente");
                         LimpiarFormulario();
+                        Servants = Fake.ObtenerTodosLosUsuarios();
                         dataGridViewCargar.DataSource = Fake.Cargar();
                         usr.RestablecerUsr();
                     }
