@@ -64,7 +64,7 @@ namespace ExamenFinal
             if (Servants.Count > 0)
             {
                 Servants = Fake.ObtenerTodosLosUsuarios();
-                dataGridViewCargar.DataSource = Servants;
+                dataGridViewCargar.DataSource = Fake.Cargar();
                 cursor1.totalRegistros = Servants.Count;
             }
             else
@@ -93,7 +93,7 @@ namespace ExamenFinal
             if (Servants.Count > 0)
             {
                 Servants = Fake.ObtenerTodosLosUsuarios();
-                dataGridViewCargar.DataSource = Servants;
+                dataGridViewCargar.DataSource = Fake.Cargar();
                 cursor1.totalRegistros = Servants.Count;
                 MessageBox.Show($"Hay un total de {cursor1.totalRegistros} registros");
             }
@@ -119,7 +119,7 @@ namespace ExamenFinal
             try
             {
                 usr.Servant = textBoxServant.Text;
-                usr.Classe = comboBoxClass.SelectedItem?.ToString();  //El ? significa Null-Conditional
+                usr.Classe = comboBoxClass.SelectedItem?.ToString();  // El ? significa Null-Conditional
                 usr.Lv = (byte)numericUpDownLV.Value;
                 usr.Noble_Phantams = comboBoxNP.SelectedItem?.ToString();
                 usr.NPEffect = comboBoxNP_Effect.SelectedItem?.ToString();
@@ -130,21 +130,16 @@ namespace ExamenFinal
                 usr.validacion = Fake.Insertar(usr);
                 if (usr.validacion)
                 {
-                    MessageBox.Show("El Servant fue ingresado correctamente");
+                    MessageBox.Show("El Servant fue agregado correctamente");
                     LimpiarFormulario();
                     usr.RestablecerUsr();
+                    Servants = Fake.ObtenerTodosLosUsuarios();
                     dataGridViewCargar.DataSource = Fake.Cargar();
+                    cursor1.totalRegistros = Servants.Count;
                 }
                 else
                 {
                     MessageBox.Show("Ha ocurrido un error, revise los datos ingresados");
-                }
-                Servants = Fake.ObtenerTodosLosUsuarios();
-                if (Servants.Count > 0)
-                {
-                    Servants = Fake.ObtenerTodosLosUsuarios();
-                    dataGridViewCargar.DataSource = Servants;
-                    cursor1.totalRegistros = Servants.Count;
                 }
             }
             catch (Exception ex)
@@ -185,20 +180,31 @@ namespace ExamenFinal
                     numericUpDownID.Focus();
                     return; 
                 }
-                usr.ID = (int)numericUpDownID.Value;
-                usr.validacion = Fake.Eliminar(usr);
-                if(usr.validacion)
+                //Esta parte sirve para confirmar la eliminacion
+                FromsBorrar confirmo = new FromsBorrar();
+                DialogResult resultara = confirmo.ShowDialog();  // Mostrara el formulario de confirmación como un cuadro de diálogo modal
+                if (resultara == DialogResult.OK)
                 {
-                    MessageBox.Show("El personaje fue eliminado correctamente");
-                    usr.RestablecerUsr();
-                    Servants = Fake.ObtenerTodosLosUsuarios();
-                    dataGridViewCargar.DataSource = Servants;
-                    cursor1.totalRegistros = Servants.Count;
+                    usr.ID = (int)numericUpDownID.Value;
+                    usr.validacion = Fake.Eliminar(usr);
+                    if (usr.validacion)
+                    {
+                        MessageBox.Show("El personaje fue eliminado correctamente");
+                        usr.RestablecerUsr();
+                        LimpiarFormulario();
+                        Servants = Fake.ObtenerTodosLosUsuarios();
+                        dataGridViewCargar.DataSource = Fake.Cargar();
+                        cursor1.totalRegistros = Servants.Count;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha courrido un error al eliminar personaje, por favor ingrese una ID valida");
+                        numericUpDownID.Focus();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ha courrido un error al eliminar personaje, por favor ingrese una ID valida");
-                    numericUpDownID.Focus();
+                    MessageBox.Show("No se elimino el registro");
                 }
             }
             catch(Exception ex)
@@ -218,8 +224,7 @@ namespace ExamenFinal
                         numericUpDownID.Focus();
                         return;
                     }
-
-                    //Esta parte de aqui sirve para confirmar la actualizacion==================================================
+                    //Esta parte de aqui sirve para confirmar la actualizacion
                 FormActualizar confirmo = new FormActualizar();
                 DialogResult resultara = confirmo.ShowDialog();  // Mostrara el formulario de confirmación como un cuadro de diálogo modal
                 if (resultara == DialogResult.OK)
@@ -353,13 +358,13 @@ namespace ExamenFinal
                 usr.Description = textBoxDescription.Text;
                 usr.Activate = checkBoxActive.Checked;
                 dataGridViewCargar.DataSource = Fake.FiltrarRegistros(usr);
-                if(numericUpDownID.Value > 0)
+                if (numericUpDownID.Value > 0)
                 {
                     cursor1.current = (int)numericUpDownID.Value -1;
                     MostrarRegistroActual();
                 }
             }
-            if(dateTimePickerDesde.Enabled)
+            else if(dateTimePickerDesde.Enabled)
             {
                 DateTime Desde = dateTimePickerDesde.Value.Date;
                 DateTime Hasta = dateTimePickerHasta.Value.Date;

@@ -307,23 +307,23 @@ namespace ExamenFinal.Data
                     sql = "SELECT * FROM fate WHERE Description Like @Description";
                     command.Parameters.AddWithValue("@Description", "%" + usr.Description + "%");
                 }
-                // Ejecutar consulta
-                if (!string.IsNullOrEmpty(sql))
+                try
                 {
-                    connection.Open();
-                    command.CommandText = sql;
-                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
-                    {
-                        adapter.Fill(Servants);
-                    }
+                    // Ejecutar consulta
+                        connection.Open();
+                        command.CommandText = sql;
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                        {
+                            adapter.Fill(Servants);
+                        }
+                    return Servants;
                 }
-                else
+                catch(Exception)
                 {
-                    // Manejar caso en que ninguna condición se cumpla
-                    MessageBox.Show("No se encontraron registros que coincidan con los criterios.");
+                    MessageBox.Show("Por favor ingrese un campo a la vez");
+                    return Cargar();
                 }
             }
-            return Servants;
         }
 
         //Buscar por fecha======================================================================================================
