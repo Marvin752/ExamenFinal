@@ -38,11 +38,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(43, 42);
+            this.label1.Location = new System.Drawing.Point(42, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(321, 23);
+            this.label1.Size = new System.Drawing.Size(334, 23);
             this.label1.TabIndex = 0;
-            this.label1.Text = "¿Esta seguro de borrar el registro?";
+            this.label1.Text = "¿Esta seguro de eliminar el registro?";
             // 
             // button1
             // 

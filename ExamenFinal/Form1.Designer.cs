@@ -375,7 +375,7 @@
             this.buttonBorrar.Name = "buttonBorrar";
             this.buttonBorrar.Size = new System.Drawing.Size(138, 50);
             this.buttonBorrar.TabIndex = 24;
-            this.buttonBorrar.Text = "Borrar";
+            this.buttonBorrar.Text = "Eliminar";
             this.buttonBorrar.UseVisualStyleBackColor = true;
             this.buttonBorrar.Click += new System.EventHandler(this.buttonBorrar_Click);
             // 
